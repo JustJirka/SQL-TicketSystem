@@ -1,0 +1,38 @@
+--Technici
+(1,“Josef”,”Depa”, ”depa@h-desk.cz”, ”7402436971”, ”Adamov”, ”České Budějovice”, ”37371”,  ”5”),
+(2, ”Jana”, ”Polišenská”, ”polisenska@h-desk.cz”, ”8542678215”, ”Borek”, ”České Budějovice”, “37367”, “4”  )
+(3, “Petr”, “Vykoupil”, “vykoupil@h-desk.cz”, “9857824698”, “Bělov”, “Zlín”, “76821”, “8”)
+(4, “Hana”, “Vykoupilová,”, “vykoupilova@h-desk.cz”, “9951548762”, “Bělov”, “Zlín”, “76821”, “9”)
+(5, “Samanta”, “Olafová”, “olafova@h-desk.cz”, “846842574”, “Abertamy”, “Karlovy Vary”, “36235”, “1”)
+(6, “Nela”, “Herkova”,” “herkova@h-desk.cz”, “5482167452”, “Andělská Hora”, “Karlovy Vary”, “36471”, “2”)
+(7, “František”, “Flek”, “flek@h-desk.cz”, “0154869213”, “Chabařovice”, “Ústí nad Labem”)
+(8, “Jan”, “Hanak”, “hanak@h-desk.cz”, “5487621857”, “Chlumec”, “Ústí nad Labem”, “40339”, “6”)
+(9, “Karel”, “Bek”, “bek@h-desk.cz”, “6487568542”, “Hanušovice”, “Šumperk”, “78833”, “5”)
+(10, “Vlastislava” “Otrafetanová”, “otrafetanova@h-desk.cz”, “5705469785”, “Dolní Studénky”, “Šumperk”, “78820”, “10”)
+(11, “Radoslava”, “Roklatová”, “roklatova@h-desk.cz”, “0485769125”, “Brníčko”, “Šumperk”, “78975”, “9”)
+
+--Uživatele
+(1, “Zbyněk”, “Vlček”, “Barchovice”, “Kolín”, “28163”, “vlček@seznam.cz”, “602 854 752”)
+(2, “Petra”, “Vyhnálková”, “Běřunice”, “Nymburk”, “28908”,  “vyhnalkova.petra@gmail.cz”, “604 589 512”)
+(3, “Michal”, “Uhrák”, “Bílá”, “Liberec”, “46343”,  “uhrak@gmail.com”, “608 457 957”)
+(4, “Barbora”, “Tyšlicová”,  “Babylon”, “Domažlice”, “34401”, “tyslicova.b@seznam.cz”, “777 526 854”)
+(5, “Svatopluk”, “Paloncý”, “Batňovice”, “Trutnov”, “54232”,  “paloncy@email.cz”, “702 968 854”)
+(6, “Ema”, “Krostanová”, “Arnolec”, “Jihlava”, “58827”,  “krostanova-ema@gmail.cz”, “722 941 523”)
+(7, “Hynek”, “Mareš”, “Branky”, “Vsetín”, “75645”,  “mares@pots.cz”, “799 147 756”)
+(8, “Štěpán”, “Šinkovský”, “Hranice”, “Přerov”, “75301”,  “sinkovskystepanek@seznam.cz”, “770 059 963”)
+(9, “Alexandra”, “Stará”, “Albrechtice”, “Karviná”, “73543”,  “stara@gmail.cz”, “739 574 625”)
+(10, “Xénie”, “Matušinská”, “Aš”, “Cheb”, “35201”,  “matusinska@gmail.cz”, “730 485 541”)
+(11, “Tomáš”, “Zavadil”, “Bělá”, “Semily”, “51401”,  “zavadiltom@seznam.com”, “601 234 587”)
+
+--Zařízení
+(1, “televize”, “LG hfis51vsz”, “27.11.2019”, “594448210”, “”)
+(2, “reproduktor”, “niceboy 86nd”, “4.5.2022”, “84215845”, “”)
+(3, “sluchátka”, “”sencor i50, “8.11.2005”, “456446”, “”)
+(4, “klávesnice”, “Apple 78pro”, “7.2.2020”, “58415669”, “”)
+(5, “monitor”, “samsung top10”, “10.10.2010”, “8547596”, “”)
+(6, “mobilní telefon”, “xiaomi no5”, “9.6.2014”, “548216475”, “”)
+(7, “notebook”, “Lenovo 028”, “6.6.2017”, “52481569”, “”)
+(8, “myš”, “connect IT 101”, “25.11.2022”, “02100215”, “”)
+(9, “powerbanka”, “Hummer 45”, “17.12.1999”, “0000001”, “”)
+(10, “tiskárna”, “canon OPE11”, “1.1.2018”, “36412555”, “”)
+(11, “projektor”, “optoma k45”, “22.2.2022”, “745415545”, “”)

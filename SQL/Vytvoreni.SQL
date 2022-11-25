@@ -1,3 +1,4 @@
+--fix psc
 CREATE TABLE Technici
 (
   TechnikID INT NOT NULL,
