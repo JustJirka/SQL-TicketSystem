@@ -56,3 +56,6 @@ VALUES
 (9, 9),
 (10, 8),
 (11, 5)
+
+--Tikety
+INSERT INTO Tikety (TicketID, UzivatelID,TechnikID, ZarizeniID, Popis, DatumVytvoreni, DatumUzavreni, Stav)

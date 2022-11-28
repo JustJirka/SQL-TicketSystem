@@ -32,12 +32,13 @@ CREATE TABLE Tikety
   Zalozeni DATE NOT NULL,
   Popis VARCHAR(250) NOT NULL,
   Stav VARCHAR(10) NOT NULL,
-  Ukonceni DATE NOT NULL,
+  Ukonceni DATE NULL,
   TicketID INT NOT NULL,
-  TechnikID INT NOT NULL,
+  TechnikID INT NULL,
   UzivatelID INT NOT NULL,
   PRIMARY KEY (TicketID),
   FOREIGN KEY (TechnikID) REFERENCES Technici(TechnikID),
+  FOREIGN KEY (ZarizeniID) REFERENCES Zarizeni(ZarizeniID),
   FOREIGN KEY (UzivatelID) REFERENCES Uzivatele(UzivatelID)
 );
 
