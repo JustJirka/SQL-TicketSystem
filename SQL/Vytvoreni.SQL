@@ -1,12 +1,12 @@
---fix psc
 CREATE TABLE Technici
 (
   TechnikID INT NOT NULL,
   Jmeno VARCHAR(50) NOT NULL,
   Prijmeni VARCHAR(50) NOT NULL,
   Email VARCHAR(200) NOT NULL,
-  RodneCislo INT NOT NULL,
+  RodneCislo BIGINT NOT NULL,
   Ulice VARCHAR(50) NOT NULL,
+  PopisneCislo INT NOT NULL,
   Mesto VARCHAR(50) NOT NULL,
   PSC INT NOT NULL,
   Uroven INT NOT NULL,
@@ -19,6 +19,7 @@ CREATE TABLE Uzivatele
   Prijmeni VARCHAR(50) NOT NULL,
   UzivatelID INT NOT NULL,
   Ulice VARCHAR(50) NOT NULL,
+  PopisneCislo INT NOT NULL,
   Mesto VARCHAR(50) NOT NULL,
   PSC INT NOT NULL,
   Email VARCHAR(100) NOT NULL,
