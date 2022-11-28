@@ -15,7 +15,7 @@ CREATE TABLE Technici
 
 CREATE TABLE Uzivatele
 (
-  Jméno VARCHAR(50) NOT NULL,
+  Jmeno VARCHAR(50) NOT NULL,
   Prijmeni VARCHAR(50) NOT NULL,
   UzivatelID INT NOT NULL,
   Ulice VARCHAR(50) NOT NULL,
@@ -44,11 +44,12 @@ CREATE TABLE Tikety
 CREATE TABLE Zarizeni
 (
   Typ VARCHAR(100) NOT NULL,
-  Název VARCHAR(100) NOT NULL,
-  Datum_vydání DATE NOT NULL,
-  Seriove_číslo INT NOT NULL,
+  Znacka VARCHAR(100) NOT NULL,
+  Model VARCHAR(100) NOT NULL,
+  DatumVydání DATE NULL,
+  SerioveCislo INT NULL,
   ZarizeniID INT NOT NULL,
-  UzivatelID INT NOT NULL,
+  UzivatelID INT NULL,
   PRIMARY KEY (ZarizeniID),
   FOREIGN KEY (UzivatelID) REFERENCES Uzivatele(UzivatelID)
 );

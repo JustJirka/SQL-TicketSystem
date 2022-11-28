@@ -14,19 +14,19 @@ VALUES
 (11, 'Radoslava', 'Roklatová', 'roklatova@h-desk.cz', 0485769125, 'Brníčko', 'Šumperk', 78975, 9,115)
 
 --Uživatele
-INSERT INTO Uzivatel (UzivatelID, Jmeno, Prijmeni, Mesto, Ulice, PSC, Email, Telefon)
+INSERT INTO Uzivatele (UzivatelID, Jmeno, Prijmeni, Mesto, Ulice, PSC, Email, Telefon, PopisneCislo)
 VALUES
-(1, 'Zbyněk', 'Vlček', 'Barchovice', 'Kolín', '28163', 'vlcek@seznam.cz', '602 854 752'),
-(2, 'Petra', 'Vyhnálková', 'Běřunice', 'Nymburk', '28908',  'vyhnalkova.petra@gmail.cz', '604 589 512'),
-(3, 'Michal', 'Uhrák', 'Bílá', 'Liberec', '46343',  'uhrak@gmail.com', '608 457 957'),
-(4, 'Barbora', 'Tyšlicová',  'Babylon', 'Domažlice', '34401', 'tyslicova.b@seznam.cz', '777 526 854'),
-(5, 'Svatopluk', 'Paloncý', 'Batňovice', 'Trutnov', '54232',  'paloncy@email.cz', '702 968 854'),
-(6, 'Ema', 'Krostanová', 'Arnolec', 'Jihlava', '58827',  'krostanova-ema@gmail.cz', '722 941 523'),
-(7, 'Hynek', 'Mareš', 'Branky', 'Vsetín', '75645',  'mares@pots.cz', '799 147 756'),
-(8, 'Štěpán', 'Šinkovský', 'Hranice', 'Přerov', '75301',  'sinkovskystepanek@seznam.cz', '770 059 963'),
-(9, 'Alexandra', 'Stará', 'Albrechtice', 'Karviná', '73543',  'stara@gmail.cz', '739 574 625'),
-(10, 'Xénie', 'Matušinská', 'Aš', 'Cheb', '35201',  'matusinska@gmail.cz', '730 485 541'),
-(11, 'Tomáš', 'Zavadil', 'Bělá', 'Semily', '51401',  'zavadiltom@seznam.com', '601 234 587'),
+(1, 'Zbyněk', 'Vlček', 'Barchovice', 'Kolín', 28163, 'vlcek@seznam.cz', 602854752, 3),
+(2, 'Petra', 'Vyhnálková', 'Běřunice', 'Nymburk', '28908',  'vyhnalkova.petra@gmail.cz', 604589512, 8),
+(3, 'Michal', 'Uhrák', 'Bílá', 'Liberec', 46343,  'uhrak@gmail.com', 608457957, 56),
+(4, 'Barbora', 'Tyšlicová',  'Babylon', 'Domažlice', 34401, 'tyslicova.b@seznam.cz', 777526854, 126),
+(5, 'Svatopluk', 'Paloncý', 'Batňovice', 'Trutnov', 54232,  'paloncy@email.cz', 702968854,450),
+(6, 'Ema', 'Krostanová', 'Arnolec', 'Jihlava', 58827,  'krostanova-ema@gmail.cz', 722941523, 810),
+(7, 'Hynek', 'Mareš', 'Branky', 'Vsetín', 75645,  'mares@pots.cz', 799147756,915),
+(8, 'Štěpán', 'Šinkovský', 'Hranice', 'Přerov', 75301,  'sinkovskystepanek@seznam.cz', 770059963, 9),
+(9, 'Alexandra', 'Stará', 'Albrechtice', 'Karviná', 73543,  'stara@utb.cz', 739574625,87),
+(10, 'Xénie', 'Matušinská', 'Aš', 'Cheb', 35201,  'matusinska@post.cz', 730485541,4),
+(11, 'Tomáš', 'Zavadil', 'Bělá', 'Semily', 51401,  'zavadiltom@cez.cz', 601234587,9)
 
 --Zařízení
 (1, 'televize', 'LG hfis51vsz', '27.11.2019', '594448210', '')
