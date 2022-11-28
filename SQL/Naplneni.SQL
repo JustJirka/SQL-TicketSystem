@@ -29,14 +29,30 @@ VALUES
 (11, 'Tomáš', 'Zavadil', 'Bělá', 'Semily', 51401,  'zavadiltom@cez.cz', 601234587,9)
 
 --Zařízení
-(1, 'televize', 'LG hfis51vsz', '27.11.2019', '594448210', '')
-(2, 'reproduktor', 'niceboy 86nd', '4.5.2022', '84215845', '')
-(3, 'sluchátka', ''sencor i50, '8.11.2005', '456446', '')
-(4, 'klávesnice', 'Apple 78pro', '7.2.2020', '58415669', '')
-(5, 'monitor', 'samsung top10', '10.10.2010', '8547596', '')
-(6, 'mobilní telefon', 'xiaomi no5', '9.6.2014', '548216475', '')
-(7, 'notebook', 'Lenovo 028', '6.6.2017', '52481569', '')
-(8, 'myš', 'connect IT 101', '25.11.2022', '02100215', '')
-(9, 'powerbanka', 'Hummer 45', '17.12.1999', '0000001', '')
-(10, 'tiskárna', 'canon OPE11', '1.1.2018', '36412555', '')
-(11, 'projektor', 'optoma k45', '22.2.2022', '745415545', '')
+INSERT INTO Zarizeni (ZarizeniID,Znacka,Model,DatumVydani, SerioveCislo)
+VALUES
+(1, 'televize', 'LG', 'hfis51vsz', '2019-11-27', 594448210, ''),
+(2, 'reproduktor', 'niceboy', '86nd', '2022-4-5', 84215845, ''),
+(3, 'sluchátka', 'sencor', 'i50', '2005-8-11', 456446, ''),
+(4, 'klávesnice', 'Apple', '78pro', '2020-2-7', 58415669, ''),
+(5, 'monitor', 'samsung', 'top10', '2010-10-10', 8547596, ''),
+(6, 'mobilní telefon', 'xiaomi', 'no5', '2014-9-6', 548216475, ''),
+(7, 'notebook', 'Lenovo', '028', '2017-6-6', 52481569, ''),
+(8, 'myš', 'connect', 'IT101', '2022-25-11', 02100215, ''),
+(9, 'powerbanka', 'Hummer', '45', '1999-12-17', 000001, ''),
+(10, 'tiskárna', 'canon', 'OPE11', '2018-1-1', 36412555, ''),
+(11, 'projektor', 'optoma', 'k45', '2022-2-2', 745415545, ''),
+
+--Přiřazená zařízení
+INSERT INTO ZarizeniUzivatele (ZarizeniID, UzivatelID)
+VALUES
+(1, 1),
+(1, 3),
+(3, 5),
+(4, 1),
+(6, 7),
+(7, 6),
+(4, 8),
+(9, 9),
+(10, 8),
+(11, 5)
