@@ -31,17 +31,17 @@ VALUES
 --Zařízení
 INSERT INTO Zarizeni (Typ, Znacka,Model,DatumVydani, SerioveCislo, UzivatelID)
 VALUES
-('televize', 'LG', 'hfis51vsz', '2019-11-27', 594448210,1),
-('reproduktor', 'niceboy', '86nd', '2022-4-5', 84215845, NULL),
-('sluchátka', 'sencor', 'i50', '2005-8-11', 4566, 3),
-('klávesnice', 'Apple', '78pro', '2020-2-7', 58415669,NULL),
-('monitor', 'samsung', 'top10', '2010-10-10', 8547596, 4),
-('mobilní telefon', 'xiaomi', 'no5', '2014-9-6', 548216475, 5),
-('notebook', 'Lenovo', '028', '2017-6-6', 524814569, NULL),
-('myš', 'connect', 'IT101', '2022-11-25', 02100215, 4),
-('powerbanka', 'Hummer', '45', '1999-12-17', 00001, 8),
-('tiskárna', 'canon', 'OPE11', '2018-1-1', 36412555, 2),
-('projektor', 'optoma', 'k45', '2022-2-2', 745415545, 10)
+('televize', 'LG', 'hfis51vsz', '2019-11-27', '5A94448210',1),
+('reproduktor', 'niceboy', '86nd', '2022-4-5', '842HF/15845', NULL),
+('sluchátka', 'sencor', 'i50', '2005-8-11', '456D6', 3),
+('klávesnice', 'Apple', '78pro', '2020-2-7', '5841D5669',NULL),
+('monitor', 'samsung', 'top10', '2010-10-10', '8547F596', 4),
+('mobilní telefon', 'xiaomi', 'no5', '2014-9-6', '548G2G16475', 5),
+('notebook', 'Lenovo', '028', '2017-6-6', '52481456A9', NULL),
+('myš', 'connect', 'IT101', '2022-11-25', '02100215', 4),
+('powerbanka', 'Hummer', '45', '1999-12-17', '00001', 8),
+('tiskárna', 'canon', 'OPE11', '2018-1-1', '36412555', 2),
+('projektor', 'optoma', 'k45', '2022-2-2', '745415545', 10)
 
 --Tikety
 INSERT INTO Tikety (TechnikID, UzivatelID, Popis, Zalozeni, Ukonceni, Stav)
