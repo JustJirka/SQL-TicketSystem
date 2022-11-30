@@ -1,24 +1,24 @@
---Vypíše tikety včetně jejich zařízení a uživatele, který je přiřazen k tiketu
+--1. Vypíše tikety včetně jejich zařízení a uživatele, který je přiřazen k tiketu
 SELECT [Tikety].[TicketID], [Tikety].[Popis], [Zarizeni].[Typ] AS [Zarizeni], [Uzivatele].[Jmeno] AS [Uzivatel]
 FROM [Tikety]
 LEFT JOIN [ZarizeniTicketu] ON [Tikety].[TicketID] = [ZarizeniTicketu].[TicketID]
 LEFT JOIN [Zarizeni] ON [ZarizeniTicketu].[ZarizeniID] = [Zarizeni].[ZarizeniID]
 LEFT JOIN [Uzivatele] ON [Tikety].[UzivatelID] = [Uzivatele].[UzivatelID]
 
---Vypíše techniky kteří mají přiřazené tikety
+--2. Vypíše techniky kteří mají přiřazené tikety
 SELECT [Tikety].[TicketID], [Technici].[Jmeno] + ' ' + [Technici].[Prijmeni] AS [Technik]
 FROM [Tikety]
 LEFT JOIN [Technici] ON [Tikety].[TechnikID] = [Technici].[TechnikID]
 WHERE [Tikety].[TechnikID] IS NOT NULL
 
---Vypíše počet tiketů které mají přiřazené technika a které jsou v stavu "otevřeno"
+--3. Vypíše počet tiketů které mají přiřazené technika a které jsou v stavu "otevřeno"
 SELECT [Technici].[Jmeno] + ' ' + [Technici].[Prijmeni] AS [Technik], COUNT([Tikety].[TicketID]) AS [PocetOtevrenychTicketu]
 FROM [Tikety]
 LEFT JOIN [Technici] ON [Tikety].[TechnikID] = [Technici].[TechnikID]
 WHERE [Tikety].[TechnikID] IS NOT NULL AND [Tikety].[Stav] = 'otevřeno'
 GROUP BY [Technici].[Jmeno] + ' ' + [Technici].[Prijmeni]
 
---Vypíše všechny tikety zařízení které vlastní uživatel s ID 1
+--4. Vypíše všechny tikety zařízení které vlastní uživatel s ID 1
 SELECT [Tikety].[TicketID], [Tikety].[Popis], [Zarizeni].[Typ] AS [Zarizeni], [Uzivatele].[Jmeno] AS [Uzivatel]
 FROM [Tikety]
 LEFT JOIN [ZarizeniTicketu] ON [Tikety].[TicketID] = [ZarizeniTicketu].[TicketID]
@@ -26,27 +26,62 @@ LEFT JOIN [Zarizeni] ON [ZarizeniTicketu].[ZarizeniID] = [Zarizeni].[ZarizeniID]
 LEFT JOIN [Uzivatele] ON [Zarizeni].[UzivatelID] = [Uzivatele].[UzivatelID]
 WHERE [Uzivatele].[UzivatelID] = 1
 
---Vypíše techniky kteří napsali více než jeden status update
+--5. Vypíše techniky kteří napsali více než jeden status update
 SELECT Technici.Jmeno, Technici.Prijmeni FROM Technici
 JOIN StatusUpdate ON Technici.TechnikID = StatusUpdate.TechnikID
 GROUP BY Technici.Jmeno, Technici.Prijmeni
 HAVING COUNT(*) > 1
 
---U tiketu s id 5 nastaví stav tiketu na "zavřený" a nastaví datum ukončení tiketu na aktuální datum
+--6. U tiketu s id 5 nastaví stav tiketu na "zavřený" a nastaví datum ukončení tiketu na aktuální datum
 UPDATE Tikety
 SET Tikety.TicketID = 'zavřený', Tikety.Ukonceni = GETDATE()
 WHERE Tikety.TicketID=5);
 
---Přidá k tiketům které nemají žádný status update status update s textem "Omlouváme se za zpoždění, pracujeme na tom."
+--7. Přidá k tiketům které nemají žádný status update status update s textem "Omlouváme se za zpoždění, pracujeme na tom."
 INSERT INTO StatusUpdate (Komentar, Datum, TicketID, TechnikID)
 SELECT 'Omlouváme se za zpoždění, pracujeme na tom.', Tikety.Zalozeni, Tikety.TicketID, Tikety.TechnikID
 FROM Tikety
-WHERE NOT EXISTS (SELECT * FROM StatusUpdate WHERE StatusUpdate.TicketID = Tikety.TicketID);
+WHERE NOT EXISTS (SELECT * FROM StatusUpdate WHERE StatusUpdate.TicketID = Tikety.TicketID)
 
+--8. Smaže zákazníky kteří nemají žádné zařízení ani ticket
+DELETE FROM Uzivatele
+WHERE UzivatelID NOT IN (SELECT UzivatelID FROM Zarizeni)
+AND UzivatelID NOT IN (SELECT UzivatelID FROM Tikety)
 
+--9. Smaže tikety které nemají žádného majitele
+DELETE FROM Tikety
+WHERE UzivatelID IS NULL;
 
+--10.Zobrazí tikety od data 2021-01-01
+SELECT * FROM Tikety WHERE Zalozeni >= '2021-01-01'
 
---
+--11. Zobrazí první 3 uživatele podle počtu tiketů
+SELECT UzivatelID, COUNT(TicketID) AS PocetTiketu
+FROM Tikety
+GROUP BY UzivatelID
+ORDER BY PocetTiketu DESC
+OFFSET 0 ROWS
+FETCH NEXT 3 ROWS ONLY
+
+--12. Sniží uroveň všem Technikům kteří nezpracovali žádný ticket za posledních 6. měsíců o 1 a zvýší uroven všem Technikům kteří zpracovali alespoň jeden ticket za posledních 6. měsíců o 1
+DECLARE @datum DATE = DATEADD(MONTH, -6, GETDATE());
+UPDATE Technici
+SET Uroven = Uroven + 1
+WHERE EXISTS (SELECT * FROM Tikety WHERE TechnikID = Technici.TechnikID AND Zalozeni > @datum);
+UPDATE Technici
+SET Uroven = Uroven - 1
+WHERE NOT EXISTS (SELECT * FROM Tikety WHERE TechnikID = Technici.TechnikID AND Zalozeni > @datum);
+
+--13. Přidá nového technika
+INSERT INTO Technici (Jmeno, Prijmeni, Email, RodneCislo, Ulice, PopisneCislo, Mesto, PSC, Uroven)
+VALUES ('Petr', 'Novak', 'novak@utb.cz', 123456789, 'Králec', 120, 'Dolní studénky', 78820, 1)
+
+--14. Zobrazí všechny techniky z Českých budějovic
+SELECT * FROM Technici WHERE Mesto = 'České Budějovice'
+
+--15. Zobrazí všechny uživatele co mají email na doménu gmail.com
+SELECT * FROM Uzivatele WHERE Email LIKE '%@gmail.com'
+
 --- procedury
 --
 
