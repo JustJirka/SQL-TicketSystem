@@ -1,10 +1,10 @@
 CREATE TABLE Technici
 (
-  TechnikID INT NOT NULL,
+  TechnikID INT NOT NULL IDENTITY(1,1),
   Jmeno VARCHAR(50) NOT NULL,
   Prijmeni VARCHAR(50) NOT NULL,
   Email VARCHAR(200) NOT NULL,
-  RodneCislo BIGINT NOT NULL,
+  RodneCislo BIGINT NULL,
   Ulice VARCHAR(50) NOT NULL,
   PopisneCislo INT NOT NULL,
   Mesto VARCHAR(50) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE Uzivatele
 (
   Jmeno VARCHAR(50) NOT NULL,
   Prijmeni VARCHAR(50) NOT NULL,
-  UzivatelID INT NOT NULL,
+  UzivatelID INT NOT NULL IDENTITY(1,1),
   Ulice VARCHAR(50) NOT NULL,
   PopisneCislo INT NOT NULL,
   Mesto VARCHAR(50) NOT NULL,
@@ -33,12 +33,11 @@ CREATE TABLE Tikety
   Popis VARCHAR(250) NOT NULL,
   Stav VARCHAR(10) NOT NULL,
   Ukonceni DATE NULL,
-  TicketID INT NOT NULL,
+  TicketID INT NOT NULL IDENTITY(1,1),
   TechnikID INT NULL,
   UzivatelID INT NOT NULL,
   PRIMARY KEY (TicketID),
   FOREIGN KEY (TechnikID) REFERENCES Technici(TechnikID),
-  FOREIGN KEY (ZarizeniID) REFERENCES Zarizeni(ZarizeniID),
   FOREIGN KEY (UzivatelID) REFERENCES Uzivatele(UzivatelID)
 );
 
@@ -47,9 +46,9 @@ CREATE TABLE Zarizeni
   Typ VARCHAR(100) NOT NULL,
   Znacka VARCHAR(100) NOT NULL,
   Model VARCHAR(100) NOT NULL,
-  DatumVydání DATE NULL,
+  DatumVydani DATE NULL,
   SerioveCislo INT NULL,
-  ZarizeniID INT NOT NULL,
+  ZarizeniID INT NOT NULL IDENTITY(1,1),
   UzivatelID INT NULL,
   PRIMARY KEY (ZarizeniID),
   FOREIGN KEY (UzivatelID) REFERENCES Uzivatele(UzivatelID)
@@ -59,7 +58,7 @@ CREATE TABLE StatusUpdate
 (
   Komentar VARCHAR(250) NOT NULL,
   Datum DATE NOT NULL,
-  StatusID INT NOT NULL,
+  StatusID INT NOT NULL IDENTITY(1,1),
   TicketID INT NOT NULL,
   TechnikID INT NOT NULL,
   PRIMARY KEY (StatusID),
@@ -67,9 +66,9 @@ CREATE TABLE StatusUpdate
   FOREIGN KEY (TechnikID) REFERENCES Technici(TechnikID)
 );
 
-CREATE TABLE PrirazeneZarizeni
+CREATE TABLE ZarizeniTicketu
 (
-  TicketID INT NOT NULL,
+  TicketID INT NOT NULL IDENTITY(1,1),
   ZarizeniID INT NOT NULL,
   PRIMARY KEY (TicketID, ZarizeniID),
   FOREIGN KEY (TicketID) REFERENCES Tikety(TicketID),
