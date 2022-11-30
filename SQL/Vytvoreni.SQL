@@ -47,7 +47,7 @@ CREATE TABLE Zarizeni
   Znacka VARCHAR(100) NOT NULL,
   Model VARCHAR(100) NOT NULL,
   DatumVydani DATE NULL,
-  SerioveCislo INT NULL,
+  SerioveCislo VARCHAR(50) NULL,
   ZarizeniID INT NOT NULL IDENTITY(1,1),
   UzivatelID INT NULL,
   PRIMARY KEY (ZarizeniID),
@@ -60,7 +60,7 @@ CREATE TABLE StatusUpdate
   Datum DATE NOT NULL,
   StatusID INT NOT NULL IDENTITY(1,1),
   TicketID INT NOT NULL,
-  TechnikID INT NOT NULL,
+  TechnikID INT NULL,
   PRIMARY KEY (StatusID),
   FOREIGN KEY (TicketID) REFERENCES Tikety(TicketID),
   FOREIGN KEY (TechnikID) REFERENCES Technici(TechnikID)
@@ -68,9 +68,11 @@ CREATE TABLE StatusUpdate
 
 CREATE TABLE ZarizeniTicketu
 (
-  TicketID INT NOT NULL IDENTITY(1,1),
+  TicketID INT NOT NULL,
   ZarizeniID INT NOT NULL,
   PRIMARY KEY (TicketID, ZarizeniID),
   FOREIGN KEY (TicketID) REFERENCES Tikety(TicketID),
   FOREIGN KEY (ZarizeniID) REFERENCES Zarizeni(ZarizeniID)
 );
+
+--Přidá k tiketům které nemají žádný status update status update s textem "Omlouváme se za zpoždění, pracujeme na tom."
