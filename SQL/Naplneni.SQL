@@ -29,33 +29,61 @@ VALUES
 (11, 'Tomáš', 'Zavadil', 'Bělá', 'Semily', 51401,  'zavadiltom@cez.cz', 601234587,9)
 
 --Zařízení
-INSERT INTO Zarizeni (ZarizeniID,Znacka,Model,DatumVydani, SerioveCislo)
+INSERT INTO Zarizeni (ZarizeniID,Znacka,Model,DatumVydani, SerioveCislo, UzivatelID)
 VALUES
-(1, 'televize', 'LG', 'hfis51vsz', '2019-11-27', 594448210, ''),
-(2, 'reproduktor', 'niceboy', '86nd', '2022-4-5', 84215845, ''),
-(3, 'sluchátka', 'sencor', 'i50', '2005-8-11', 456446, ''),
-(4, 'klávesnice', 'Apple', '78pro', '2020-2-7', 58415669, ''),
-(5, 'monitor', 'samsung', 'top10', '2010-10-10', 8547596, ''),
-(6, 'mobilní telefon', 'xiaomi', 'no5', '2014-9-6', 548216475, ''),
-(7, 'notebook', 'Lenovo', '028', '2017-6-6', 52481569, ''),
-(8, 'myš', 'connect', 'IT101', '2022-25-11', 02100215, ''),
-(9, 'powerbanka', 'Hummer', '45', '1999-12-17', 000001, ''),
-(10, 'tiskárna', 'canon', 'OPE11', '2018-1-1', 36412555, ''),
-(11, 'projektor', 'optoma', 'k45', '2022-2-2', 745415545, ''),
+(1, 'televize', 'LG', 'hfis51vsz', '2019-11-27', 594448210,1),
+(2, 'reproduktor', 'niceboy', '86nd', '2022-4-5', 84215845, NULL),
+(3, 'sluchátka', 'sencor', 'i50', '2005-8-11', 4566, 3),
+(4, 'klávesnice', 'Apple', '78pro', '2020-2-7', 58415669,NULL),
+(5, 'monitor', 'samsung', 'top10', '2010-10-10', 8547596, 4),
+(6, 'mobilní telefon', 'xiaomi', 'no5', '2014-9-6', 548216475, 5),
+(7, 'notebook', 'Lenovo', '028', '2017-6-6', 524814569, NULL),
+(8, 'myš', 'connect', 'IT101', '2022-25-11', 02100215, 4),
+(9, 'powerbanka', 'Hummer', '45', '1999-12-17', 00001, 8),
+(10, 'tiskárna', 'canon', 'OPE11', '2018-1-1', 36412555, 2),
+(11, 'projektor', 'optoma', 'k45', '2022-2-2', 745415545, 10)
 
 --Přiřazená zařízení
-INSERT INTO ZarizeniUzivatele (ZarizeniID, UzivatelID)
+INSERT INTO ZarizeniTicketu (ZarizeniID, TicketID)
 VALUES
 (1, 1),
-(1, 3),
-(3, 5),
-(4, 1),
-(6, 7),
-(7, 6),
+(3, 2),
+(2, 3),
+(4, 5),
+(5, 6),
+(1, 6),
 (4, 8),
-(9, 9),
-(10, 8),
-(11, 5)
+(8, 9),
+(10,11)
 
 --Tikety
-INSERT INTO Tikety (TicketID, UzivatelID,TechnikID, ZarizeniID, Popis, DatumVytvoreni, DatumUzavreni, Stav)
+INSERT INTO Tikety (TicketID,TechnikID, UzivatelID, Popis, DatumVytvoreni, DatumUzavreni, Stav)
+VALUES
+(1, 2, 2, 'Nefunguje ovládání zvuku na televizi', '2020-11-27', '2020-11-28', 'uzavřeno'),
+(2, 2, 3, 'Vypadává zvuk při přehrávání z youtube', '2021-5-20', '', 'otevřeno'),
+(3, NULL, 3, 'Pravé sluchátko se utrhlo', '2022-8-25', '2022-9-30', 'uzavřeno'),
+(4, 3, NULL, 'Nefunguje Wifi na 3. Patře', '2022-11-30','2022-11-30','uzavřeno'),
+(5, 7, 4, 'Nefunguje klávesnice', '2020-12-1', '2020-12-2', 'uzavřeno'),
+(6, 6, 5, 'Nefunguje výstup z počítače ani na monitor ani na televizi', '2022-12-2', '', 'otevřeno'),
+(7, 8, 8, 'Nefungují mé přihlašovací údaje', '2022-12-3', '', 'otevřeno'),
+(8, NULL, 4, 'Nefunguje klávesnice opět', '2022-10-4', '', 'otevřeno'),
+(9, 10, 3,'Nefunguje myš', '2022-12-5', '2022-12-6', 'uzavřeno'),
+(10, 10, 2, 'Nefungují čipové senzory na dveřích', '2022-10-6', '', 'otevřeno'),
+(11, NULL, 1, 'Tiskárna tiskne pouze fialově', '2022-12-7', '', 'otevřeno')
+
+--StatusUpdate
+INSERT INTO StatusUpdate (StausID, TicketID, TechnikID, Komentar, Datum)
+VALUES
+(1, 1, 2, 'Vyměněn kabel. Nepomohlo proběhne další diagnostika', '2020-11-28'),
+(2, 1, 3 'Nastavil jsem ovládání zvuku na televizi. Problém se jeví jako vyřešen otevřete nový ticket pokud se problém objeví znovu', '2020-11-28'),
+(3, 2,, 'Vypadávání zvuku při přehrávání z youtube je způsobeno špatným signálem nejspíše chyba v zařízení', '2021-5-21'),
+(4, 2, 3, 'Odeslán na opravu', '2021-5-22'),
+(5, 3,, 'Pravé sluchátko se utrhlo, není opravitelné, Sluchátka byla recyklována zažádejte si o nové', '2022-8-26'),
+(6, 4,, 'Wifi na 3. Patře je vypnuté z důvodu výmněny routeru jak bylo psáno 14 dní předem mailem', '2022-12-1'),
+(7, 5,,'Klavesnice nebyla zapojena do pc po zapojení funguje.','2022-12-30')
+(8, 6, 6, 'Výstup z počítače je v pořádku, problém je v zařízení', '2022-12-3'),
+(9, 6, 6, 'Zařízení bylo odesláno na opravu', '2022-12-4'),
+(10, 7, 8, 'Nefungují přihlašovací údaje byly změněny', '2022-12-4'),
+(11, 8, 3, 'Klávesnice byla dignostikována a nejeví žádné známky poruchy bude probíhat další diagnostika', '2022-12-5'),
+(12, 9, 10, 'Myš byla vyměněna za novou', '2022-12-6'),
+(13, 10, 10, 'Čipové senzory byly obědnány na opravu technikem', '2022-12-7')
