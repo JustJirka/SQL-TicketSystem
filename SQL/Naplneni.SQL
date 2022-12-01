@@ -37,7 +37,7 @@ VALUES
 ('klávesnice', 'Apple', '78pro', '2020-2-7', '5841D5669',NULL),
 ('monitor', 'samsung', 'top10', '2010-10-10', '8547F596', 4),
 ('mobilní telefon', 'xiaomi', 'no5', '2014-9-6', '548G2G16475', 5),
-('notebook', 'Lenovo', '028', '2017-6-6', '52481456A9', NULL),
+('notebook', 'Lenovo', '028', NULL, '52481456A9', NULL),
 ('myš', 'connect', 'IT101', '2022-11-25', '02100215', 4),
 ('powerbanka', 'Hummer', '45', '1999-12-17', '00001', 8),
 ('tiskárna', 'canon', 'OPE11', '2018-1-1', '36412555', 2),
@@ -47,16 +47,16 @@ VALUES
 INSERT INTO Tikety (TechnikID, UzivatelID, Popis, Zalozeni, Ukonceni, Stav)
 VALUES
 (2, 2, 'Nefunguje ovládání zvuku na televizi', '2020-11-27', '2020-11-28', 'uzavřeno'),
-(2, 3, 'Vypadává zvuk při přehrávání z youtube', '2021-5-20', '', 'otevřeno'),
+(2, 3, 'Vypadává zvuk při přehrávání z youtube', '2021-5-20', NULL, 'otevřeno'),
 (NULL, 3, 'Pravé sluchátko se utrhlo', '2022-8-25', '2022-9-30', 'uzavřeno'),
 (3, 3, 'Nefunguje Wifi na 3. Patře', '2022-11-30','2022-11-30','uzavřeno'),
 (7, 4, 'Nefunguje klávesnice', '2020-12-1', '2020-12-2', 'uzavřeno'),
-(6, 5, 'Nefunguje výstup z počítače ani na monitor ani na televizi', '2022-12-2', '', 'otevřeno'),
-(8, 8, 'Nefungují mé přihlašovací údaje', '2022-12-3', '', 'otevřeno'),
-(NULL, 4, 'Nefunguje klávesnice opět', '2022-10-4', '', 'otevřeno'),
+(6, 5, 'Nefunguje výstup z počítače ani na monitor ani na televizi', '2022-12-2', NULL, 'otevřeno'),
+(8, 8, 'Nefungují mé přihlašovací údaje', '2022-12-3', NULL, 'otevřeno'),
+(NULL, 4, 'Nefunguje klávesnice opět', '2022-10-4', NULL, 'otevřeno'),
 (10, 3,'Nefunguje myš', '2022-12-5', '2022-12-6', 'uzavřeno'),
-(10, 2, 'Nefungují čipové senzory na dveřích', '2022-10-6', '', 'otevřeno'),
-(NULL, 1, 'Tiskárna tiskne pouze fialově', '2022-12-7', '', 'otevřeno')
+(10, 2, 'Nefungují čipové senzory na dveřích', '2022-10-6', NULL, 'otevřeno'),
+(NULL, 1, 'Tiskárna tiskne pouze fialově', '2022-12-7', NULL, 'otevřeno')
 
 --StatusUpdate
 INSERT INTO StatusUpdate (TicketID, TechnikID, Komentar, Datum)

@@ -1,5 +1,5 @@
 --1. Vypíše tikety včetně jejich zařízení a uživatele, který je přiřazen k tiketu
-SELECT [Tikety].[TicketID], [Tikety].[Popis], [Zarizeni].[Typ] AS [Zarizeni], [Uzivatele].[Jmeno] AS [Uzivatel]
+SELECT [Tikety].[TicketID], [Tikety].[Popis], [Zarizeni].[Typ] AS [Zarizeni], [Uzivatele].[Jmeno], [Uzivatele].[Prijmeni]  AS [Uzivatel]
 FROM [Tikety]
 LEFT JOIN [ZarizeniTicketu] ON [Tikety].[TicketID] = [ZarizeniTicketu].[TicketID]
 LEFT JOIN [Zarizeni] ON [ZarizeniTicketu].[ZarizeniID] = [Zarizeni].[ZarizeniID]
@@ -11,7 +11,7 @@ FROM [Tikety]
 LEFT JOIN [Technici] ON [Tikety].[TechnikID] = [Technici].[TechnikID]
 WHERE [Tikety].[TechnikID] IS NOT NULL
 
---3. Vypíše počet tiketů které mají přiřazené technika a které jsou v stavu "otevřeno"
+--3. Vypíše počet otevřených tiketů jednotlivých techniků
 SELECT [Technici].[Jmeno] + ' ' + [Technici].[Prijmeni] AS [Technik], COUNT([Tikety].[TicketID]) AS [PocetOtevrenychTicketu]
 FROM [Tikety]
 LEFT JOIN [Technici] ON [Tikety].[TechnikID] = [Technici].[TechnikID]
@@ -19,7 +19,7 @@ WHERE [Tikety].[TechnikID] IS NOT NULL AND [Tikety].[Stav] = 'otevřeno'
 GROUP BY [Technici].[Jmeno] + ' ' + [Technici].[Prijmeni]
 
 --4. Vypíše všechny tikety zařízení které vlastní uživatel s ID 1
-SELECT [Tikety].[TicketID], [Tikety].[Popis], [Zarizeni].[Typ] AS [Zarizeni], [Uzivatele].[Jmeno] AS [Uzivatel]
+SELECT [Tikety].[TicketID], [Tikety].[Popis], [Zarizeni].[Typ] AS [Zarizeni], [Uzivatele].[Jmeno], [Uzivatele].[Prijmeni]
 FROM [Tikety]
 LEFT JOIN [ZarizeniTicketu] ON [Tikety].[TicketID] = [ZarizeniTicketu].[TicketID]
 LEFT JOIN [Zarizeni] ON [ZarizeniTicketu].[ZarizeniID] = [Zarizeni].[ZarizeniID]
@@ -27,19 +27,19 @@ LEFT JOIN [Uzivatele] ON [Zarizeni].[UzivatelID] = [Uzivatele].[UzivatelID]
 WHERE [Uzivatele].[UzivatelID] = 1
 
 --5. Vypíše techniky kteří napsali více než jeden status update
-SELECT Technici.Jmeno, Technici.Prijmeni FROM Technici
+SELECT Technici.Jmeno, Technici.Prijmeni, COUNT(*) AS [Pocet Update] FROM Technici
 JOIN StatusUpdate ON Technici.TechnikID = StatusUpdate.TechnikID
 GROUP BY Technici.Jmeno, Technici.Prijmeni
 HAVING COUNT(*) > 1
 
 --6. U tiketu s id 5 nastaví stav tiketu na "zavřený" a nastaví datum ukončení tiketu na aktuální datum
 UPDATE Tikety
-SET Tikety.TicketID = 'zavřený', Tikety.Ukonceni = GETDATE()
-WHERE Tikety.TicketID=5);
+SET Tikety.Stav = 'zavřený', Tikety.Ukonceni = GETDATE()
+WHERE Tikety.TicketID=5;
 
 --7. Přidá k tiketům které nemají žádný status update status update s textem "Omlouváme se za zpoždění, pracujeme na tom."
-INSERT INTO StatusUpdate (Komentar, Datum, TicketID, TechnikID)
-SELECT 'Omlouváme se za zpoždění, pracujeme na tom.', Tikety.Zalozeni, Tikety.TicketID, Tikety.TechnikID
+INSERT INTO StatusUpdate (Komentar, Datum, TicketID)
+SELECT 'Omlouváme se za zpoždění, pracujeme na tom.', GETDATE(), Tikety.TicketID
 FROM Tikety
 WHERE NOT EXISTS (SELECT * FROM StatusUpdate WHERE StatusUpdate.TicketID = Tikety.TicketID)
 
@@ -55,7 +55,7 @@ WHERE UzivatelID IS NULL;
 --10.Zobrazí tikety od data 2021-01-01
 SELECT * FROM Tikety WHERE Zalozeni >= '2021-01-01'
 
---11. Zobrazí první 3 uživatele podle počtu tiketů
+--11. Zobrazí ID prvních 3 uživatel podle počtu tiketů
 SELECT UzivatelID, COUNT(TicketID) AS PocetTiketu
 FROM Tikety
 GROUP BY UzivatelID
@@ -93,7 +93,7 @@ WHERE TicketID = (SELECT MAX(TicketID) FROM Tikety)
 END
 
 
--- Procedura která přidá tikety které nemají přiřazené technika technikovi který má nejméně tiketů
+-- Procedura která přidá tikety které nemají přiřazené technika technikovi který má nejméně otevřených tiketů
 CREATE PROCEDURE [dbo].[PridatTiketyTechnikovi]
 AS
 BEGIN
@@ -107,10 +107,11 @@ BEGIN
 
     WHILE (@PocetTiketu > 0)
     BEGIN
-        SET @MinPocetTiketu = (SELECT MIN(PocetTiketu) FROM (SELECT COUNT(*) AS PocetTiketu FROM Tikety GROUP BY TechnikID) AS MinPocetTiketu)
-        SET @MinTechnikID = (SELECT TechnikID FROM (SELECT COUNT(*) AS PocetTiketu, TechnikID FROM Tikety GROUP BY TechnikID) AS MinPocetTiketu WHERE PocetTiketu = @MinPocetTiketu)
+        SET @MinPocetTiketu = (SELECT MIN(PocetTiketu) FROM (SELECT COUNT(*) AS PocetTiketu FROM Tikety WHERE Stav='otevřeno' GROUP BY TechnikID) AS MinPocetTiketu)
+        SET @MinTechnikID = (SELECT TOP 1 TechnikID FROM (SELECT COUNT(*) AS PocetTiketu, TechnikID FROM Tikety GROUP BY TechnikID) AS MinPocetTiketu WHERE PocetTiketu = @MinPocetTiketu)
         SET @TicketID = (SELECT TOP 1 TicketID FROM Tikety WHERE TechnikID IS NULL)
         UPDATE Tikety SET TechnikID = @MinTechnikID WHERE TicketID = @TicketID
         SET @PocetTiketu = @PocetTiketu - 1
     END
 END
+EXEC PridatTiketyTe
