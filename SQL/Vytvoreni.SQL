@@ -31,7 +31,7 @@ CREATE TABLE Tikety
 (
   Zalozeni DATE NOT NULL,
   Popis VARCHAR(250) NOT NULL,
-  Stav VARCHAR(10) NOT NULL,
+  Stav VARCHAR(10) NULL,
   Ukonceni DATE NULL,
   TicketID INT NOT NULL IDENTITY(1,1),
   TechnikID INT NULL,
@@ -74,5 +74,3 @@ CREATE TABLE ZarizeniTicketu
   FOREIGN KEY (TicketID) REFERENCES Tikety(TicketID),
   FOREIGN KEY (ZarizeniID) REFERENCES Zarizeni(ZarizeniID)
 );
-
---Přidá k tiketům které nemají žádný status update status update s textem "Omlouváme se za zpoždění, pracujeme na tom."

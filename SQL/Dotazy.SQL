@@ -82,11 +82,18 @@ SELECT * FROM Technici WHERE Mesto = 'České Budějovice'
 --15. Zobrazí všechny uživatele co mají email na doménu gmail.com
 SELECT * FROM Uzivatele WHERE Email LIKE '%@gmail.com'
 
---- procedury
---
+--Triger který při vytvoření tiketu nastaví stav tiketu na "otevřeno" a nastaví datum založení tiketu na aktuální datum
+CREATE TRIGGER OteviraniTicketu ON Tikety
+AFTER INSERT
+AS
+BEGIN
+UPDATE Tikety
+SET Stav = 'otevřeno', Zalozeni = GETDATE()
+WHERE TicketID = (SELECT MAX(TicketID) FROM Tikety)
+END
 
 
---Přidá tikety které nemají přiřazené technika technikovi který má nejméně tiketů
+-- Procedura která přidá tikety které nemají přiřazené technika technikovi který má nejméně tiketů
 CREATE PROCEDURE [dbo].[PridatTiketyTechnikovi]
 AS
 BEGIN
